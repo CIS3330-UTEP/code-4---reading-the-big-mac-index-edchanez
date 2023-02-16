@@ -1,0 +1,9 @@
+import csv
+big_mac_file = './big-mac-full-index.csv'
+file_object = open(big_mac_file)
+
+csv_reader = csv.reader(file_object)
+
+for row in csv_reader:
+    print(row)
+    

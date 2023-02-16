@@ -1,0 +1,7 @@
+big_mac_file = './big-mac-full-index.csv'
+
+file_object = open(big_mac_file)
+
+for line in file_object:
+    if "Mexico" in line:
+        print(line.split(",")) 
