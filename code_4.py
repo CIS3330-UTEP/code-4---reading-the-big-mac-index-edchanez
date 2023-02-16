@@ -31,18 +31,29 @@ def get_big_mac_price_by_country(country_code):
 
 def get_the_cheapest_big_mac_price_by_year(year):
     df= pd.read_csv(big_mac_file)
-    cheapquery = f"(iso_a3 == date >= '{year}-01-01' and date <= '{year}-12-31')"
+    cheapquery = f"(date >= '{year}-01-01' and date <= '{year}-12-31')"
     year_df = df.query(cheapquery)
-    result = year_df['dollar_price'].min()
-    result = round(result,2)
+    resultindex = year_df['dollar_price'].idxmin()
+    # print(resultindex)
+    # print(type(resultindex))
+    minrow = year_df.loc[resultindex]
+    # print(minrow)
+    roundresult = round(minrow['dollar_price'],2)
+    result = f"{minrow['name']}({minrow['iso_a3']}): ${roundresult}"
+    # print(result)
+
+    # print(result)
+    # result = round(result,2) 
     return result
 
 def get_the_most_expensive_big_mac_price_by_year(year):
     df= pd.read_csv(big_mac_file)
-    expensivequery = f"(iso_a3 == date >= '{year}-01-01' and date <= '{year}-12-31')"
+    expensivequery = f"(date >= '{year}-01-01' and date <= '{year}-12-31')"
     expyear_df = df.query(expensivequery)
-    result = expyear_df['dollar_price'].max()
-    result = round(result, 2)
+    resultindex = expyear_df['dollar_price'].idxmax()
+    maxrow = expyear_df.loc[resultindex]
+    result = f"{maxrow['name']}({maxrow['iso_a3']}): ${round(maxrow['dollar_price'],2)}"
+
     return result
 
     
